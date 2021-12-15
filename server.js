@@ -1,28 +1,13 @@
-// server.js
-
 const express = require('express');
-const faker = require('faker');
-
-//Create an app
+const generator = require('./src/generator.js');
 const app = express();
 
-const getRandomInt = function(max) {
-    return Math.floor(Math.random() * max);
-  }
-
-
-app.get('/', (req, res) => {
-    res.send('Hello ' + faker.name.firstName() + '!\n');
+app.get('/', async (req, res)  => {
+    res.send({name: await generator.getName()});
 });
 
-
-app.get('/names', (req, res) => {
-    const names = [];
-    let n = getRandomInt(12);
-
-    while (n--) {
-        names.push(faker.name.firstName())
-    }
+app.get('/names', async (req, res) => {
+    const names = await generator.getNames();
 
     if (names.length === 0) {
         console.error('ERROR No names generated.');
@@ -30,7 +15,6 @@ app.get('/names', (req, res) => {
     }
 
     console.log('Generated names total: ' + names.length);
-
     res.send({names: names});
 });
 
