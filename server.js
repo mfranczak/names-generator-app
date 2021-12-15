@@ -1,8 +1,13 @@
 const express = require('express');
 const generator = require('./src/generator.js');
 const app = express();
+// app.use(express.static('public'));
 
-app.get('/', async (req, res)  => {
+//app.use(express.static(__dirname + 'public'))
+
+app.use("/", express.static(__dirname + "/public"));
+
+app.get('/iam', async (req, res)  => {
     res.send({name: await generator.getName()});
 });
 

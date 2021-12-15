@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('/iam')
+                .then(response => response.json())
+                .then(data => document.getElementById('welcome').innerText = 'Hello ' + data.name + '!')
+                .catch(err => console.error(err));
+        });        
+    </script>     
+  </head>
+  <body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title" id="welcome"></h1>
+    </div>
+  </section>
+  </body>  
+</html>
